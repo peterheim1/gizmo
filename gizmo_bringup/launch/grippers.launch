@@ -1,0 +1,26 @@
+<launch>
+
+<!-- Run a separate controller for the one sided gripper -->
+  <node name="right_gripper_controller" pkg="gizmo_bringup" type="gripper_controller.py" output="screen">
+     <rosparam>
+        model: singlesided
+        invert: true
+        center: 0.0
+        pad_width: 0.004
+        finger_length: 0.065
+        joint: right_gripper_finger_joint
+      </rosparam>
+  </node>
+
+<!-- Run a separate controller for the one sided gripper -->
+  <node name="left_gripper_controller" pkg="gizmo_bringup" type="gripper_controller.py" output="screen">
+     <rosparam>
+        model: singlesided
+        invert: true
+        center: 0.0
+        pad_width: 0.004
+        finger_length: 0.065
+        joint: left_gripper_finger_joint
+      </rosparam>
+  </node>
+</launch>

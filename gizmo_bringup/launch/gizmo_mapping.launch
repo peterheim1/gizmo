@@ -1,0 +1,25 @@
+<launch>
+ 
+   <!-- Make sure simulated time is off -->
+    <param name="/use_sim_time" value="False" />  
+   <!-- start remote computers
+    <include file="$(find gizmo_bringup)/launch/remote.launch"/>  
+-->
+   <!-- start start basic services on prime-->
+    <include file="$(find gizmo_bringup)/launch/basic.launch"/>  
+
+   <node name="cartographer_node" pkg="cartographer_ros"
+      type="cartographer_node" args="
+          -configuration_directory $(find gizmo_bringup)/config
+          -configuration_basename taurob_tracker.lua"
+      output="screen">
+    <remap from="scan" to="/scan" />
+
+  </node>
+
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+
+
+     
+</launch>

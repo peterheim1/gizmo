@@ -1,0 +1,15 @@
+<launch>
+  
+  <!-- start the chat interface-->
+  <node name="phoenix_chat" pkg="phoenix_ai" type="gizmo_chat.py" output="screen"/>
+-->
+ <!-- start the chat interface-
+  <node name="bt_control" pkg="phoenix_ai" type="bt_control.py" output="screen"/>
+-->
+<!-- start py_trees interface-->
+  <node name="bt_control" pkg="gizmo_ai" type="five_2.py" output="screen"/>
+
+
+ 
+ 
+</launch>

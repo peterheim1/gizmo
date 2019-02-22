@@ -1,0 +1,14 @@
+<launch>
+  <!-- start the chat interface-->
+  <node name="voice" pkg="phoenix_ai" type="speaker.py" output="screen"/>
+
+ <!-- start the chat interface-->
+  <node name="phoenix" pkg="phoenix_ai" type="jarvis.py" output="screen"/>
+
+  <!-- start the bahaviour tree interface
+  <node name="phoenix_bt" pkg="phoenix_ai" type="bt_control.py" output="screen"/>
+--> 
+  
+
+ 
+</launch>

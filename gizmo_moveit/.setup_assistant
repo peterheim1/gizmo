@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: gizmo_description
+    relative_path: urdf/gizmo1.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/gizmo.srdf
+  CONFIG:
+    author_name: peter
+    author_email: peter@home.org
+    generated_timestamp: 1550014461

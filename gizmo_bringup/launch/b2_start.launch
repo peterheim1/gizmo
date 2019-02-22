@@ -1,0 +1,8 @@
+<launch>
+
+<machine name="b2" address="b2" user="pi" env-loader="/home/pi/catkin_ws/devel/remote_env_loader.sh" default="true" />
+<!-- start voice-->
+<node machine="b2" name="b2" pkg="b2_bringup" type="base.bash" output="screen">
+  </node>
+
+</launch>

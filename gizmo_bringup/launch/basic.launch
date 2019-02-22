@@ -1,0 +1,29 @@
+<launch>
+ 
+    <!-- Make sure simulated time is off -->
+    <param name="/use_sim_time" value="False" />    
+     <!-- Read in the URDF model of our robot. -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find gizmo_description)/urdf/gizmo1.xacro'" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+   <!--   joint action controllers-->
+   
+    <node name="right_follow_joint" pkg="gizmo_bringup" type="right_follow_joint.py"  output="screen" />
+    <node name="left_follow_joint" pkg="gizmo_bringup" type="left_follow_joint.py"  output="screen" />
+    <node name="head_joint" pkg="gizmo_bringup" type="follow_head.py"  output="screen" />
+
+    <!-- start gripper action service
+    <include file="$(find gizmo_bringup)/launch/grippers.launch"/>  
+-->
+
+ <!-- Start the Dynamixel Joint States Publisher -->
+    <node name="gizmo_joint_states_publisher" pkg="gizmo_bringup" type="joint_state_publisher.py"  output="screen" />
+
+    <!-- Start all Dynamixels in the relaxed state -->
+   <node pkg="gizmo_bringup" type="relax_all_servos.py" name="relax_all_servos" />
+
+    <!-- Start head trajectory node
+   <node pkg="gizmo_bringup" type="head_tracker.py" name="head_track" />
+-->
+      
+</launch>

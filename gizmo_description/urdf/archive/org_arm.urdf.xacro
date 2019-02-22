@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="M_SCALE" value="0.001"/>
+    <xacro:include filename="$(find r1)/urdf/hardware.xacro" />
+
+
+ <link name="base_footprint">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.001" />
+        </geometry>
+        <material name="TransparentGreen" />
+      </visual>
+  </link>
+
+  <xacro:my_cylinder name="right_shoulder" l="0.005" r="0.03" xyz="0 0 0" rpy="1.56 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+<link name="shoulder_link" >
+   <visual>
+      <geometry>
+        <mesh filename="package://r1/meshes/gizmo_lift.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <xacro:yellow2/>
+      <origin rpy="1.57 0 0" xyz=" 0 0 0"/>
+    </visual>
+    <xacro:default_inertial mass="1.0" />
+  </link>
+
+  <link name="robo_servo">
+      <visual>
+        <origin xyz="0.02 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.04 0.02 0.04" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+  </link>
+
+<link name="robo_servo2">
+      <visual>
+        <origin xyz="0.02 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.04 0.02 0.04" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+  </link>
+
+<link name="rotate_servo">
+      <visual>
+        <origin xyz="0.0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.02 0.02 0.02" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+  </link>
+
+<xacro:my_cylinder name="servo_bracket" l="0.085" r="0.01" xyz="0 0 0" rpy="0 1.57 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+<joint name="base_footprint_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="right_shoulder" />
+    	<origin xyz="0 0 0.3" rpy="0 0 0" />
+  </joint> 
+ 
+<joint name="shoulder_joint" type="revolute">
+    	<parent link="right_shoulder" />
+    	<child link="shoulder_link" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+    	<origin xyz="0.01 0.025 0" rpy="0 0 0" />
+  </joint> 
+
+<joint name="s1_joint" type="revolute">
+    	<parent link="shoulder_link" />
+    	<child link="robo_servo" />
+    	<origin xyz="0.01 0.01 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+  </joint> 
+
+<joint name="s2_link" type="fixed">
+    	<parent link="robo_servo" />
+    	<child link="servo_bracket" />
+    	<origin xyz="0.085 0 0" rpy="0 0 0" />
+  </joint> 
+
+<joint name="s2_joint" type="revolute">
+    	<parent link="servo_bracket" />
+    	<child link="robo_servo2" />
+    	<origin xyz="0.04 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+  </joint> 
+
+<joint name="s3_joint" type="revolute">
+    	<parent link="robo_servo2" />
+    	<child link="rotate_servo" />
+    	<origin xyz="0.045 0 0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+  </joint> 
+
+
+
+ 
+</robot>

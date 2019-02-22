@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<package>
+  <name>gizmo_sim</name>
+  <version>0.0.0</version>
+  <description>The gizmo_sim package</description>
+
+  <maintainer email="peter.heim1066@gmail.com">Peter Heim</maintainer>
+
+  <license>TODO</license>
+
+  <!-- <url type="website">http://wiki.ros.org/gizmo_sim</url> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>control_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>moveit_commander</build_depend>
+  <build_depend>moveit_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+  <run_depend>actionlib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>arbotix_python</run_depend>
+  <run_depend>control_msgs</run_depend>
+  <run_depend>fake_localization</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>map_server</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>moveit_commander</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+  <run_depend>rbx1_bringup</run_depend>
+  <run_depend>rbx2_nav</run_depend>
+  <run_depend>gizmo_ai</run_depend>
+  <run_depend>gizmo_bringup</run_depend>
+  <run_depend>gizmo_moveit</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>sound_play</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+
+  
+</package>

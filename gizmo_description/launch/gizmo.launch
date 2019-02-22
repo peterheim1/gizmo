@@ -1,0 +1,38 @@
+<launch>
+ 
+    <!-- Make sure simulated time is off -->
+    <param name="/use_sim_time" value="False" />    
+    <!-- Read in the URDF model of our robot. -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find r1)/urdf/gizmo.xacro'" />
+    <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  --> 
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /odom /map 100" />
+    <node pkg="tf" type="static_transform_publisher" name="odom_base_broadcaster" args="0 0 0 0 0 0 /base_link /odom 100" />
+    <!-- start camera-->
+    <include file="$(find r1)/launch/camera.launch"/>
+
+    <!-- start pan and tilt-->
+    <include file="$(find r1)/launch/dynamixels_head.launch"/>
+
+    <!-- Start the Dynamixel Joint States Publisher -->
+    <node name="dynamixel_joint_states_publisher" pkg="r1" type="dynamixel_joint_state_publisher.py"  output="screen" />
+
+    <!-- Start all Dynamixels in the relaxed state -->
+   <node pkg="r1" type="relax_all_servos.py" name="relax_all_servos" />
+
+    <!-- Start head trajectory node-->
+   <node pkg="r1" type="head_tracker.py" name="head_track" />
+
+   <!-- phoenix_ai-->
+   <include file="$(find phoenix_ai)/launch/ai_start.launch"/>
+
+   <!-- diagnostics-->
+    <include file="$(find r1)/launch/diagnostics.launch"/>
+    <include file="$(find r1)/launch/monitor_dynamixels.launch"/>
+   
+   
+
+
+     
+</launch>

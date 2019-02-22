@@ -1,0 +1,54 @@
+<launch>
+
+  <arg name="dotfilepath" default="$(env HOME)/.ros/tree.dot" />
+ 
+  <param name="/use_sim_time" value="false" />
+
+<!-- start the local voice interface-->
+  <node name="gizmo_voice" pkg="gizmo_bringup" type="action_voice.py" output="screen"/>
+
+  <!-- Read in the URDF model of our robot. -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find gizmo_description)/urdf/gizmo1.xacro'" />
+  
+  
+  <!-- Set the name of the map yaml file: can be overridden on the command line. -->
+  <arg name="map" default="map3.yaml" />
+
+  
+    
+  <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" clear_params="true" output="screen">
+     <rosparam file="$(find gizmo_sim)/config/fake_gizmo.yaml" command="load" />
+     <param name="sim" value="true"/>
+  </node>
+
+    <param name="/use_gui" value="True" />
+ 
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> 
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="20.0" />
+  </node>
+  
+  
+  <!-- Run the map server with a blank map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find gizmo_bringup)/maps/$(arg map)" />
+  
+  <!-- The move_base node -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+     <rosparam file="$(find gizmo_bringup)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+     <rosparam file="$(find gizmo_bringup)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+     <rosparam file="$(find gizmo_bringup)/config/local_costmap_params.yaml" command="load" />
+     <rosparam file="$(find gizmo_bringup)/config/global_costmap_params.yaml" command="load" />
+     <rosparam file="$(find gizmo_bringup)/config/base_local_planner_params.yaml" command="load" />
+     
+  </node>
+  
+  
+  <!-- Run fake localization compatible with AMCL output -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen" />
+      
+  <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+
+</launch>

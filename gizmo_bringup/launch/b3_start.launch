@@ -1,0 +1,11 @@
+<launch>
+
+<machine name="b3" address="b3" user="pi" env-loader="/home/pi/catkin_ws/devel/remote_env_loader.sh" default="true" />
+<!-- start base-->
+
+<node machine="b3" name="base" pkg="b3_bringup" type="base.bash" output="screen">
+     
+   </node>
+
+
+</launch>

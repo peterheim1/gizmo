@@ -1,0 +1,6 @@
+<launch>
+ 
+  <node pkg="py_trees_ros" name="dashboard" type="tutorial_dashboard"/>
+
+  <!--<node pkg="gizmo_ai" name="tree" type="five.py"/>-->
+</launch>

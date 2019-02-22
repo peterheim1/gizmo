@@ -1,0 +1,28 @@
+<launch>
+
+<!--- Run AMCL -->
+  <include file="$(find gizmo_bringup)/launch/amcl_gizmo.launch" />
+
+<!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find gizmo_bringup)/maps/map3.yaml"/>
+  
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+<!--Default local planner -->
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" /> 
+    <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />  -->
+    <!--<param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />-->
+    <!--<param name="base_local_planner" value="eband_local_planner/EBandPlannerROS" /> -->
+    
+    <!--<param name="base_global_planner" value="karto_global_planner/KartoGlobalPathPlanner"/>-->
+    <rosparam file="$(find gizmo_bringup)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find gizmo_bringup)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find gizmo_bringup)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find gizmo_bringup)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find gizmo_bringup)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find gizmo_bringup)/config/base_local_planner_params.yaml" command="load" />
+    <!--<rosparam file="$(find gizmo_bringup)/config/dwa_local_planner_params.yaml" command="load" />-->
+    
+  </node>
+</launch>

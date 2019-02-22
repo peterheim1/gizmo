@@ -1,0 +1,10 @@
+<launch>
+  
+  <!-- AMCL -->
+  <include file="$(find gizmo_bringup)/launch/amcl.launch"/>
+
+  <!-- move_base -->
+   <include file="$(find gizmo_bringup)/launch/move_base_hydro.launch"/> 
+    
+
+</launch>

@@ -1,0 +1,6 @@
+<launch>
+
+  <include file="$(find gizmo_bringup)/launch/b1_start.launch"/>
+  <include file="$(find gizmo_bringup)/launch/b2_start.launch"/>
+  <include file="$(find gizmo_bringup)/launch/b3_start.launch"/>
+</launch>

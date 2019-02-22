@@ -1,0 +1,27 @@
+<launch>
+ 
+   <!-- Make sure simulated time is off -->
+    <param name="/use_sim_time" value="False" />  
+   <!-- start remote computers
+    <include file="$(find gizmo_bringup)/launch/remote.launch"/>  
+-->
+   <!-- start start basic services on prime-->
+    <include file="$(find gizmo_bringup)/launch/basic.launch"/>  
+
+   <!-- start AI
+    <include file="$(find gizmo_bringup)/launch/move_base_hydro.launch"/>  
+-->
+   <!-- start navigation
+    <include file="$(find gizmo_bringup)/launch/ai_start.launch"/>  
+    -->
+   <!-- diagnostics
+    <include file="$(find gizmo_bringup)/launch/diagnostic.launch"/>
+    <include file="$(find gizmo_bringup)/launch/monitor_dynamixels.launch"/>
+   -->
+   
+<include file="$(find gizmo_bringup)/launch/b1_start.launch"/>
+  <include file="$(find gizmo_bringup)/launch/b2_start.launch"/>
+  <include file="$(find gizmo_bringup)/launch/b3_start.launch"/>
+
+     
+</launch>
